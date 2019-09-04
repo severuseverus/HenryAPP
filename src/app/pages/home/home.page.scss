@@ -1,0 +1,22 @@
+:root {
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;
+    
+}
+
+.avatar {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main{
+    margin-top: 10%;
+}
+.card-avatar{
+    margin-top: -10%;
+    border-radius: 25px;
+}
+.card{
+    border-radius: 25px;
+}
