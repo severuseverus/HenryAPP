@@ -4,22 +4,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-avatar vertical="top" horinzontal="center" slot="fixed">
-        <!-- <img src="{{imgSrc}}" />-->
-        <img src="https://scontent.fcgh4-1.fna.fbcdn.net/v/t1.0-9/14572137_1241700919184406_9095117787853781878_n.jpg?_nc_cat=103&_nc_eui2=AeE3M6bvZaiqHOxpHB4RJFno697lIlF8Zkw_FH6ya5dtd8dffzOpT5MZjaFlJ8fQ3SwtpJ_fFYB1CDx2dfGk2rrVR5QgTQhBT8AUpbDO0YjFkA&_nc_oc=AQkmAXxGnGpUdjpXS1klLqR7J5-lz62Ru3d4ko7nMmjRI9XeRDnZOHoH6In7lhEdfVk&_nc_ht=scontent.fcgh4-1.fna&oh=0132e8b56cc7caa36c4f25fc73ac2847&oe=5E0D4A8D" />
-    </ion-avatar>
-     
+<ion-content class="colorb">
   <div class="main">
-    <ion-avatar class="avatar">
-        <!-- <img src="{{imgSrc}}" />-->
-        <img src="https://scontent.fcgh4-1.fna.fbcdn.net/v/t1.0-9/14572137_1241700919184406_9095117787853781878_n.jpg?_nc_cat=103&_nc_eui2=AeE3M6bvZaiqHOxpHB4RJFno697lIlF8Zkw_FH6ya5dtd8dffzOpT5MZjaFlJ8fQ3SwtpJ_fFYB1CDx2dfGk2rrVR5QgTQhBT8AUpbDO0YjFkA&_nc_oc=AQkmAXxGnGpUdjpXS1klLqR7J5-lz62Ru3d4ko7nMmjRI9XeRDnZOHoH6In7lhEdfVk&_nc_ht=scontent.fcgh4-1.fna&oh=0132e8b56cc7caa36c4f25fc73ac2847&oe=5E0D4A8D" />
+    <ion-avatar class="avatar" *ngIf="user">
+         <img src="{{ user.imageSrc }}" />
+        <!--<img src="https://scontent.fcgh4-1.fna.fbcdn.net/v/t1.0-9/14572137_1241700919184406_9095117787853781878_n.jpg?_nc_cat=103&_nc_eui2=AeE3M6bvZaiqHOxpHB4RJFno697lIlF8Zkw_FH6ya5dtd8dffzOpT5MZjaFlJ8fQ3SwtpJ_fFYB1CDx2dfGk2rrVR5QgTQhBT8AUpbDO0YjFkA&_nc_oc=AQkmAXxGnGpUdjpXS1klLqR7J5-lz62Ru3d4ko7nMmjRI9XeRDnZOHoH6In7lhEdfVk&_nc_ht=scontent.fcgh4-1.fna&oh=0132e8b56cc7caa36c4f25fc73ac2847&oe=5E0D4A8D" />-->
     </ion-avatar>
      
   <ion-card class="card-avatar">
       <ion-card-header >
         <!--          <ion-card-subtitle>{{name}}</ion-card-subtitle> -->
-          <ion-card-subtitle>Rodrigo David</ion-card-subtitle>
+          <ion-card-subtitle *ngIf="user" >{{ user.name }}</ion-card-subtitle>
           <ion-card-title>Pontuação Global: 1000 <!--{{data.actualScore}}--></ion-card-title>
         </ion-card-header>
         <ion-card-content fullscreen>
@@ -27,14 +22,14 @@
         </ion-card-content>
   </ion-card>
   </div>
-  <ion-card class="card">
+  <ion-card class="card" *ngIf="travel">
       <ion-card-header>
         <!--          <ion-card-subtitle>{{name}}</ion-card-subtitle> -->
           <ion-card-subtitle>Corrida em progresso</ion-card-subtitle>
-          <ion-card-title>Pontuação: 1000 <!--{{data.actualScore}}--></ion-card-title>
+          <ion-card-title> {{ travel.actualScore }} </ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <h1>Carro: Ford Ka</h1>
+          <h2> Carro: {{ travel.model }}</h2>
         </ion-card-content>
   </ion-card>
 
