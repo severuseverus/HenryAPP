@@ -18,12 +18,12 @@ export class TravelService {
     //);
   //}
   getUser() {
-    return this.http.get(`${this.url}/users`).pipe(
+    return this.http.get(`${this.url}/users?email=digo.david.oliveira@gmail.com`).pipe(
       map(results => results['_data']['0'])
     );
   }
-  getDetails() {
-    return this.http.get(`${this.url}/travels?finished=false`).pipe(
+  getDetails(userId) {
+    return this.http.get(`${this.url}/travels?vin=123425657342&finished=false&_id=${userId}`).pipe(
       map(results => results['_data']['0'])
     );
   }
