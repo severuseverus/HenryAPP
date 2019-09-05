@@ -26,7 +26,7 @@
       <ion-card-header>
         <!--          <ion-card-subtitle>{{name}}</ion-card-subtitle> -->
           <ion-card-subtitle>Corrida em progresso</ion-card-subtitle>
-          <ion-card-title> {{ travel.actualScore }} </ion-card-title>
+          <ion-card-title> Pontuação: {{ travel.actualScore }} </ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <h2> Carro: {{ travel.model }}</h2>
@@ -34,22 +34,8 @@
   </ion-card>
 
   <ion-grid>
-    <ion-row size="3" align-self-start>
-      <ion-col>
-          <ion-card class="card">
-              <ion-card-header>
-                <ion-card-title>Corridas Passadas</ion-card-title>
-              </ion-card-header>
-            </ion-card>
-      </ion-col>
-      <ion-col>
-
-          <ion-card class="card">
-              <ion-card-header>
-                <ion-card-title>Corridas Passadas</ion-card-title>
-              </ion-card-header>
-            </ion-card>
-      </ion-col>
+    <ion-row>
+        <ion-button shape="round" fill="outline" color="dark" class="btn">Histórico Corridas</ion-button>
     </ion-row>
   </ion-grid>
 </ion-content>
