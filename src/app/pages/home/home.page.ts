@@ -11,40 +11,27 @@ import { take } from 'rxjs/operators';
 })
 export class HomePage implements OnInit {
   user = null;
-  private userId =null;
+  private userId = null;
   travel = null;
 
   constructor(private travelService: TravelService) { }
 
-  ngOnInit() {
-    const numbers = interval(100);
+  async ngOnInit() {
+    const numbers = interval(5000);
     const takeFourNumbers = numbers.pipe();
     //TIRAR O TAKE 4 para chamar infinitamente o get
     //const takeFourNumbers = numbers.pipe();
-    this.travelService.getUser().subscribe(data => {
-      this.user = data;
-      this.userId = data._id;
+    this.user = (await this.travelService.getUser())["_data"][0];
+
+    takeFourNumbers.subscribe(async x => {
+      this.travel = (await this.travelService.getDetails(this.user._id))["_data"][0];
     });
 
-    const id ="5d65dacd896d6a4264b430ef";
-    console.log(this.userId);
-
-    if(this.user !== null){
-      takeFourNumbers.subscribe(x => this.travelService.getDetails(this.user._id).subscribe(data => {
-        this.travel = data;
-      }));
-  
-      this.travelService.getDetails(this.user._id).subscribe(data => {
-        this.travel = data;
-      });
-      
-    }else{
-      console.log("DEU RUIM");
-      console.log(this.user);
-    }
+    this.travel = (await this.travelService.getDetails(this.user._id))["_data"][0];
+    console.log(this.travel);
   }
 
   //DAR UNSUBSCRIBE NOS METODOS ACIMA É NOIS
-  ngOnDestroy(){
+  ngOnDestroy() {
   }
 }
