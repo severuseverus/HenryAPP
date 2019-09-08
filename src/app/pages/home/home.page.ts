@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TravelService } from './../../services/travel.service';
-import { Observable } from 'rxjs';
 import { interval } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,26 +10,41 @@ import { take } from 'rxjs/operators';
 })
 export class HomePage implements OnInit {
   user = null;
-  private userId = null;
   travel = null;
+  helper =null;
+  infractions= [];
+  pont = 0;
+  pontuacaoGlobal = 0;
 
-  constructor(private travelService: TravelService) { }
+  constructor(private travelService: TravelService, private router: Router) { }
 
   async ngOnInit() {
-    const numbers = interval(5000);
-    const takeFourNumbers = numbers.pipe();
-    //TIRAR O TAKE 4 para chamar infinitamente o get
-    //const takeFourNumbers = numbers.pipe();
+    const time = interval(5000);
+    const repeat = time.pipe();
     this.user = (await this.travelService.getUser())["_data"][0];
 
-    takeFourNumbers.subscribe(async x => {
+    this.pont = 0;
+    this.helper = (await this.travelService.getMedia(this.user._id))["_data"] ;
+    for (let key in this.helper) {
+      this.pont += this.helper[key]['actualScore'];
+    }
+    this.pontuacaoGlobal = this.pont / this.helper.length;
+
+    repeat.subscribe(async x => {
       this.travel = (await this.travelService.getDetails(this.user._id))["_data"][0];
+      this.infractions = (await this.travelService.getDetails(this.user._id))["_data"][0]['infractions'];
     });
 
     this.travel = (await this.travelService.getDetails(this.user._id))["_data"][0];
+    this.infractions = (await this.travelService.getDetails(this.user._id))["_data"][0]['infractions'];
+
     console.log(this.travel);
+    console.log(this.infractions);
   }
 
+  goToTravelHistory(){
+    this.router.navigate(['travel-history']);
+  }
   //DAR UNSUBSCRIBE NOS METODOS ACIMA É NOIS
   ngOnDestroy() {
   }

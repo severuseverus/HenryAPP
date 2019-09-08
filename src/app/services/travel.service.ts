@@ -20,7 +20,16 @@ export class TravelService {
   getUser() {
     return this.http.get(`${this.url}/users?email=digo.david.oliveira@gmail.com`).toPromise();
   }
+  
   getDetails(userId) {
     return this.http.get(`${this.url}/travels?finished=false&user=${userId}`).toPromise();
+  }
+
+  getMedia(userId) {
+    return this.http.get(`${this.url}/travels?user=${userId}`).toPromise();
+  }
+
+  getTravels(userId) {
+    return this.http.get(`${this.url}/travels?finished=true`).toPromise();
   }
 }

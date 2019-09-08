@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+    <ion-title>Histórico de corridas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-virtual-scroll [items]="travels">
+        <ion-item *virtualItem="let travels;">
+          <ion-label>
+            <h2>{{ travels.store.name }} </h2>
+            <h3>Veículo: {{ travels.model }}</h3>
+            
+            <br>
+            <p>Data Inicio: {{ travels.startDate | date: 'dd/MM/yyyy' }}</p>
+            <p>Data Fim: {{ travels.endDate | date: 'dd/MM/yyyy' }}</p>
+          </ion-label>
+          <ion-note slot="end" color="danger" *ngIf="travels.actualScore <= 300">Pontuação: {{ travels.actualScore }}</ion-note>
+          <ion-note slot="end" color="warning" *ngIf="travels.actualScore > 300 && travels.actualScore < 600">Pontuação: {{ travels.actualScore }}</ion-note>
+          <ion-note slot="end" color="primary" *ngIf="travels.actualScore >= 600">Pontuação: {{ travels.actualScore }}</ion-note>
+        </ion-item>
+        
+      </ion-virtual-scroll>
+</ion-content>
