@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
   }
 
   setUser(user){
-    this.storage.set('user', user);
+    this.userService.login(user);
     this.goToMain();
   }
 
