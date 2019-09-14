@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>  
+    <ion-item *ngFor="let item of (users)">
+        <ion-avatar class="avatar" *ngIf="item.imageSrc" slot="start">
+            <img src="{{ item.imageSrc }}" />
+       </ion-avatar>
+       <ion-avatar class="avatar" *ngIf="!item.imageSrc" slot="start">
+          <img src="./assets/icon/support.png" />
+     </ion-avatar>
+        <ion-label (click)="setUser(item)">
+            <h1>{{ item.name }}</h1>
+            <ion-label>email: {{ item.email }}</ion-label>
+        </ion-label>        
+     </ion-item>
+  </ion-list>
+</ion-content>

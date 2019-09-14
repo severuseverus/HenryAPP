@@ -23,20 +23,16 @@ export class HomePage implements OnInit {
     const repeat = time.pipe();
     this.user = (await this.travelService.getUser())["_data"][0];
 
-    this.pont = 0;
-    this.helper = (await this.travelService.getMedia(this.user._id))["_data"] ;
+    let pont = 0;
+    this.helper = (await this.travelService.getMedia(this.user._id))["_data"];
     for (let key in this.helper) {
-      this.pont += this.helper[key]['actualScore'];
+      pont += this.helper[key]['actualScore'];
     }
-    this.pontuacaoGlobal = this.pont / this.helper.length;
+    this.pontuacaoGlobal = pont / this.helper.length;
 
-    repeat.subscribe(async x => {
-      this.travel = (await this.travelService.getDetails(this.user._id))["_data"][0];
-      this.infractions = (await this.travelService.getDetails(this.user._id))["_data"][0]['infractions'];
-    });
+    repeat.subscribe(() => this.doGetTravel()); 
 
-    this.travel = (await this.travelService.getDetails(this.user._id))["_data"][0];
-    this.infractions = (await this.travelService.getDetails(this.user._id))["_data"][0]['infractions'];
+    this.doGetTravel();
 
     console.log(this.travel);
     console.log(this.infractions);
@@ -45,7 +41,10 @@ export class HomePage implements OnInit {
   goToTravelHistory(){
     this.router.navigate(['travel-history']);
   }
-  //DAR UNSUBSCRIBE NOS METODOS ACIMA É NOIS
-  ngOnDestroy() {
+
+  async doGetTravel(){
+      this.travel = (await this.travelService.getDetails(this.user._id))["_data"][0];
+      this.infractions = this.travel.infractions;
   }
+
 }
