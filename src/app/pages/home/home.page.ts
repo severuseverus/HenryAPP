@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TravelService } from './../../services/travel.service';
+import { UserService } from './../../services/user.service';
+import { Storage } from '@ionic/storage';
+
 import { interval } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -16,12 +19,16 @@ export class HomePage implements OnInit {
   pont = 0;
   pontuacaoGlobal = 0;
 
-  constructor(private travelService: TravelService, private router: Router) { }
+  constructor(
+    private travelService: TravelService, 
+    private router: Router, 
+    private userService: UserService, 
+    private storage: Storage) { }
 
-  async ngOnInit() {
+  async ionViewWillEnter() {
     const time = interval(5000);
     const repeat = time.pipe();
-    this.user = (await this.travelService.getUser())["_data"][0];
+    this.user = await this.storage.get('user');
 
     let pont = 0;
     this.helper = (await this.travelService.getMedia(this.user._id))["_data"];
@@ -33,9 +40,6 @@ export class HomePage implements OnInit {
     repeat.subscribe(() => this.doGetTravel()); 
 
     this.doGetTravel();
-
-    console.log(this.travel);
-    console.log(this.infractions);
   }
 
   goToTravelHistory(){
@@ -45,6 +49,11 @@ export class HomePage implements OnInit {
   async doGetTravel(){
       this.travel = (await this.travelService.getDetails(this.user._id))["_data"][0];
       this.infractions = this.travel.infractions;
+  }
+
+  async sair(){
+    await this.userService.logout();
+    this.router.navigate(['login']);
   }
 
 }
