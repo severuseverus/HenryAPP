@@ -24,6 +24,10 @@ export class HomePage implements OnInit {
     private router: Router, 
     private userService: UserService, 
     private storage: Storage) { }
+  
+  ngOnInit(){
+
+  }
 
   async ionViewWillEnter() {
     const time = interval(5000);
@@ -48,7 +52,9 @@ export class HomePage implements OnInit {
 
   async doGetTravel(){
       this.travel = (await this.travelService.getDetails(this.user._id))["_data"][0];
-      this.infractions = this.travel.infractions;
+      if(this.travel != undefined){
+        this.infractions = this.travel.infractions;
+      }
   }
 
   async sair(){

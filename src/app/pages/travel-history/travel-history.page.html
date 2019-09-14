@@ -13,7 +13,9 @@
           <ion-label>
             <h2>{{ travels.store.name }} </h2>
             <h3>Veículo: {{ travels.model }}</h3>
-            
+            <h3 *ngIf="travels.status == 2">Corrida Finalizada</h3>
+            <h3 *ngIf="travels.status == 1">Corrida em Andamento</h3>
+            <h3 *ngIf="travels.status == 0">Corrida Criada</h3>
             <br>
             <p>Data Inicio: {{ travels.startDate | date: 'dd/MM/yyyy' }}</p>
             <p>Data Fim: {{ travels.endDate | date: 'dd/MM/yyyy' }}</p>
@@ -22,6 +24,10 @@
           <ion-note slot="end" color="warning" *ngIf="travels.actualScore > 300 && travels.actualScore < 600">Pontuação: {{ travels.actualScore }}</ion-note>
           <ion-note slot="end" color="primary" *ngIf="travels.actualScore >= 600">Pontuação: {{ travels.actualScore }}</ion-note>
         </ion-item>
-        
-      </ion-virtual-scroll>
+    </ion-virtual-scroll>
+    <ion-card *ngIf="travels.lenght == 0">
+      <ion-card-header>
+          <ion-card-subtitle>Nenhuma corrida Encontrada</ion-card-subtitle>
+        </ion-card-header>
+  </ion-card>
 </ion-content>

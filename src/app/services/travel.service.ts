@@ -22,7 +22,11 @@ export class TravelService {
   }
 
   getTravels(userId) {
-    return this.http.get(`${this.url}/travels?status=2`).toPromise();
+    return this.http.get(`${this.url}/travels?status=2&user=${userId}`).toPromise();
+  }
+
+  getTravelsCreated(userId) {
+    return this.http.get(`${this.url}/travels?status=0&user=${userId}`).toPromise();
   }
 
 }

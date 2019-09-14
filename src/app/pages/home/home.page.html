@@ -1,16 +1,29 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Henry</ion-title>
+      <ion-buttons slot="end">
+          <ion-button (click)="sair()">
+            <ion-icon slot="icon-only" name="log-out"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
 
 <ion-content class="colorb">
   <div class="main">
     <ion-avatar class="avatar" *ngIf="user" slot="start">
          <img src="{{ user.imageSrc }}" />
-        <!--<img src="https://scontent.fcgh4-1.fna.fbcdn.net/v/t1.0-9/14572137_1241700919184406_9095117787853781878_n.jpg?_nc_cat=103&_nc_eui2=AeE3M6bvZaiqHOxpHB4RJFno697lIlF8Zkw_FH6ya5dtd8dffzOpT5MZjaFlJ8fQ3SwtpJ_fFYB1CDx2dfGk2rrVR5QgTQhBT8AUpbDO0YjFkA&_nc_oc=AQkmAXxGnGpUdjpXS1klLqR7J5-lz62Ru3d4ko7nMmjRI9XeRDnZOHoH6In7lhEdfVk&_nc_ht=scontent.fcgh4-1.fna&oh=0132e8b56cc7caa36c4f25fc73ac2847&oe=5E0D4A8D" />-->
+    </ion-avatar>
+    <ion-avatar class="avatar" *ngIf="!user" slot="start">
+          <img src="./assets/icon/support.png" />
     </ion-avatar>
      
   <ion-card class="card-avatar">
       <ion-card-header >
         <!--          <ion-card-subtitle>{{name}}</ion-card-subtitle> -->
           <ion-card-subtitle *ngIf="user" >{{ user.name }}</ion-card-subtitle>
-          <ion-card-title> Pontuação Global: {{ pontuacaoGlobal }} </ion-card-title>
+          <ion-card-title *ngIf="pontuacaoGlobal"> Pontuação Global: {{ pontuacaoGlobal }} </ion-card-title>
+          <ion-card-title *ngIf="!pontuacaoGlobal"> Nenhuma corrida finalizada </ion-card-title>
         </ion-card-header>
         <ion-card-content fullscreen *ngIf="pontuacaoGlobal >= 900" >
             <h2>Classificação: A lenda das ruas!</h2>
@@ -31,7 +44,6 @@
   </div>
   <ion-card class="card" *ngIf="travel">
       <ion-card-header>
-        <!--          <ion-card-subtitle>{{name}}</ion-card-subtitle> -->
           <ion-card-subtitle>Corrida em progresso</ion-card-subtitle>
           <ion-card-title> Pontuação: {{ travel.actualScore }} </ion-card-title>
         </ion-card-header>
@@ -39,7 +51,7 @@
           <h2> Carro: {{ travel.model }}</h2>         
         </ion-card-content>
   </ion-card>
-  <ion-card class="card" *ngIf="infractions">
+  <ion-card class="card" *ngIf="infractions.lenght > 0">
       <ion-card-header>
           <ion-card-title> Infrações: </ion-card-title>
       </ion-card-header>

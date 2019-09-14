@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TravelService } from './../../services/travel.service';
-import { interval } from 'rxjs';
-import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
+
 
 @Component({
   selector: 'app-travel-history',
@@ -12,15 +12,23 @@ export class TravelHistoryPage implements OnInit {
   user = null;
   travels= [];
 
-  constructor(private travelService: TravelService) { }
+  constructor(private travelService: TravelService, private storage: Storage) { }
 
-  async ngOnInit() {
-    this.user = (await this.travelService.getUser())["_data"][0];
-    console.log("user: ");
-    console.log(this.user);
+  ngOnInit() {
+    
+  }
+
+  async ionViewWillEnter() {
+    this.user = await this.storage.get('user');
+    console.log(this.user._id);
     this.travels = (await this.travelService.getTravels(this.user._id))["_data"];
-    console.log("travel: ");
     console.log(this.travels);
+    if(this.travels.length == 0){
+      this.travels = (await this.travelService.getDetails(this.user._id))["_data"];
+      if(this.travels.length == 0){
+        this.travels = (await this.travelService.getTravelsCreated(this.user._id))["_data"];
+      }
+    }
 
   }
 
