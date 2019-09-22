@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
       <ion-buttons slot="start">
           <ion-back-button defaultHref="/"></ion-back-button>
       </ion-buttons>
@@ -9,20 +9,23 @@
 
 <ion-content>
     <ion-virtual-scroll [items]="travels">
-        <ion-item *virtualItem="let travels;">
+        <ion-item *virtualItem="let travels;" lines="none">
+          <span class="vl"></span>  
+          <span class="dot"></span>
+          <span class="dot2"></span>
           <ion-label>
-            <h2>{{ travels.store.name }} </h2>
-            <h3>Veículo: {{ travels.model }}</h3>
-            <h3 *ngIf="travels.status == 2">Corrida Finalizada</h3>
-            <h3 *ngIf="travels.status == 1">Corrida em Andamento</h3>
-            <h3 *ngIf="travels.status == 0">Corrida Criada</h3>
+            <h1>{{ travels.model }} </h1>
+            <h2>{{ travels.startDate | date: 'dd/MM/yyyy' }} - {{ travels.endDate | date: 'dd/MM/yyyy' }}</h2>
+            <h3>{{ travels.store.name }}</h3>
+            <h3><b>R$ {{ travels.startPrice }},00</b></h3>
             <br>
-            <p>Data Inicio: {{ travels.startDate | date: 'dd/MM/yyyy' }}</p>
-            <p>Data Fim: {{ travels.endDate | date: 'dd/MM/yyyy' }}</p>
+            <h3 *ngIf="travels.status == 2" class="finished">Corrida Finalizada</h3>
+            <h3 *ngIf="travels.status == 1" class="progress">Corrida em Andamento</h3>
+            <h3 *ngIf="travels.status == 0">Corrida Criada</h3>
+            <h2 class="bad" *ngIf="travels.actualScore <= 300">Pontuação: {{ travels.actualScore }}</h2>
+            <h2 class="medium" *ngIf="travels.actualScore > 300 && travels.actualScore < 600">Pontuação: {{ travels.actualScore }}</h2>
+            <h2 class="good" *ngIf="travels.actualScore >= 600">Pontuação: {{ travels.actualScore }}</h2>
           </ion-label>
-          <ion-note slot="end" color="danger" *ngIf="travels.actualScore <= 300">Pontuação: {{ travels.actualScore }}</ion-note>
-          <ion-note slot="end" color="warning" *ngIf="travels.actualScore > 300 && travels.actualScore < 600">Pontuação: {{ travels.actualScore }}</ion-note>
-          <ion-note slot="end" color="primary" *ngIf="travels.actualScore >= 600">Pontuação: {{ travels.actualScore }}</ion-note>
         </ion-item>
     </ion-virtual-scroll>
     <ion-card *ngIf="travels.lenght == 0">

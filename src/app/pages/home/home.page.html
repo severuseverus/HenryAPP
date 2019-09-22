@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Henry</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="sair()">
@@ -68,7 +68,7 @@
     </ion-list>
   </ion-card>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="pontuacaoGlobal">
       <ion-button (click)="goToTravelHistory()" shape="round" fill="outline" color="dark" class="btn">Histórico Corridas
       </ion-button>
     </ion-row>
