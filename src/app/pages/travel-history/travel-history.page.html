@@ -14,9 +14,9 @@
           <span class="dot"></span>
           <span class="dot2"></span>
           <ion-label>
-            <h1>{{ travels.model }} </h1>
+            <h1>{{ travels.store.name }}</h1>
             <h2>{{ travels.startDate | date: 'dd/MM/yyyy' }} - {{ travels.endDate | date: 'dd/MM/yyyy' }}</h2>
-            <h3>{{ travels.store.name }}</h3>
+            <h3>{{ travels.model }} </h3>
             <h3><b>R$ {{ travels.startPrice }},00</b></h3>
             <br>
             <h3 *ngIf="travels.status == 2" class="finished">Corrida Finalizada</h3>
