@@ -1,36 +1,39 @@
 <ion-header>
   <ion-toolbar color="primary" class="fonte">
-      <ion-buttons slot="start">
-          <ion-back-button defaultHref="/"></ion-back-button>
-      </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
     <ion-title>Histórico de corridas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-virtual-scroll [items]="travels">
-        <ion-item *virtualItem="let travels;" lines="none">
-          <span class="vl"></span>  
-          <span class="dot"></span>
-          <span class="dot2"></span>
-          <ion-label>
-            <h1>{{ travels.store.name }}</h1>
-            <h2>{{ travels.startDate | date: 'dd/MM/yyyy' }} - {{ travels.endDate | date: 'dd/MM/yyyy' }}</h2>
-            <h3>{{ travels.model }} </h3>
-            <h3><b>R$ {{ travels.startPrice }},00</b></h3>
-            <br>
-            <h3 *ngIf="travels.status == 2" class="finished">Corrida Finalizada</h3>
-            <h3 *ngIf="travels.status == 1" class="progress">Corrida em Andamento</h3>
-            <h3 *ngIf="travels.status == 0">Corrida Criada</h3>
-            <h2 class="bad" *ngIf="travels.actualScore <= 300">Pontuação: {{ travels.actualScore }}</h2>
-            <h2 class="medium" *ngIf="travels.actualScore > 300 && travels.actualScore < 600">Pontuação: {{ travels.actualScore }}</h2>
-            <h2 class="good" *ngIf="travels.actualScore >= 600">Pontuação: {{ travels.actualScore }}</h2>
-          </ion-label>
-        </ion-item>
-    </ion-virtual-scroll>
-    <ion-card *ngIf="travels.lenght == 0">
-      <ion-card-header>
-          <ion-card-subtitle>Nenhuma corrida Encontrada</ion-card-subtitle>
-        </ion-card-header>
+  <ion-virtual-scroll [items]="travels">
+    <ion-item *virtualItem="let travels;" lines="none">
+      <span class="vl"></span>
+      <span class="dot"></span>
+      <span class="dot2"></span>
+      <ion-label>
+        <h1>{{ travels.store.name }}</h1>
+        <h2>{{ travels.startDate | date: 'dd/MM/yyyy' }} - {{ travels.endDate | date: 'dd/MM/yyyy' }}</h2>
+        <h3>{{ travels.model }} </h3>
+        <h3><b>R$ {{ travels.startPrice }},00</b></h3>
+        <br>
+        <h3 *ngIf="travels.status == 2" class="finished">Corrida Finalizada</h3>
+        <h3 *ngIf="travels.status == 1" class="progress">Corrida em Andamento</h3>
+        <h3 *ngIf="travels.status == 0">Corrida Criada</h3>
+        <h2 class="bad" *ngIf="travels.actualScore < 850">Pontuação: {{ travels.actualScore }}</h2>
+        <h2 class="medium" *ngIf="travels.actualScore >= 850  && travels.actualScore < 900">Pontuação:
+          {{ travels.actualScore }}</h2>
+        <h2 class="good" *ngIf="travels.actualScore >= 900  && travels.actualScore < 950">Pontuação:
+          {{ travels.actualScore }}</h2>
+        <h2 class="good" *ngIf="travels.actualScore >= 950">Pontuação: {{ travels.actualScore }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-virtual-scroll>
+  <ion-card *ngIf="travels.lenght == 0">
+    <ion-card-header>
+      <ion-card-subtitle>Nenhuma corrida Encontrada</ion-card-subtitle>
+    </ion-card-header>
   </ion-card>
 </ion-content>

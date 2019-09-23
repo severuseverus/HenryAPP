@@ -42,7 +42,6 @@ export class HomePage implements OnDestroy {
     this.pontuacaoGlobal = pont / this.helper.length;
     this.repeat.subscribe(() => this.getTravel());
     await this.getTravel();
-    //console.log(this.travel);
   }
 
   ngOnDestroy(): void {

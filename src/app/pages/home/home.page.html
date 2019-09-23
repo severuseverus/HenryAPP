@@ -22,33 +22,38 @@
       <ion-card-header>
         <!--          <ion-card-subtitle>{{name}}</ion-card-subtitle> -->
         <ion-card-subtitle *ngIf="user">{{ user.name }}</ion-card-subtitle>
-        <ion-card-title *ngIf="pontuacaoGlobal"> Pontuação Global: {{ pontuacaoGlobal }} </ion-card-title>
+        <ion-card-title *ngIf="pontuacaoGlobal < 850"> Pontuação Global: <span
+            class="pontos">{{ pontuacaoGlobal }}</span>
+        </ion-card-title>
+        <ion-card-title *ngIf="pontuacaoGlobal >=850"> Pontuação Global: {{ pontuacaoGlobal }} </ion-card-title>
         <ion-card-title *ngIf="!pontuacaoGlobal"> Nenhuma corrida finalizada </ion-card-title>
       </ion-card-header>
-      <ion-card-content fullscreen *ngIf="pontuacaoGlobal >= 900">
-        <h2>Classificação: A lenda das ruas!</h2>
+      <ion-card-content fullscreen *ngIf="pontuacaoGlobal >= 950">
+        <h2>A lenda das ruas!</h2>
       </ion-card-content>
-      <ion-card-content fullscreen *ngIf="pontuacaoGlobal >= 750 && pontuacaoGlobal < 900">
-        <h2>Classificação: Heroi do asfalto!</h2>
+      <ion-card-content fullscreen *ngIf="pontuacaoGlobal >= 900 && pontuacaoGlobal < 950">
+        <h2>Herói do asfalto!</h2>
       </ion-card-content>
-      <ion-card-content fullscreen *ngIf="pontuacaoGlobal > 500 && pontuacaoGlobal < 750">
-        <h2>Classificação: Prodigo do volante!</h2>
+      <ion-card-content fullscreen *ngIf="pontuacaoGlobal >= 850 && pontuacaoGlobal < 900">
+        <h2>Prodígio do volante!</h2>
       </ion-card-content>
-      <ion-card-content fullscreen *ngIf="pontuacaoGlobal > 300 && pontuacaoGlobal < 500">
-        <h2>Classificação: Cangaceiro do trafego!</h2>
+      <ion-card-content fullscreen *ngIf="pontuacaoGlobal >= 500 && pontuacaoGlobal < 850">
+        <h2>Cangaceiro do tráfego!</h2>
       </ion-card-content>
-      <ion-card-content fullscreen *ngIf="pontuacaoGlobal <= 300">
-        <h2>Classificação: A espera de um milagre!</h2>
+      <ion-card-content fullscreen *ngIf="pontuacaoGlobal < 500">
+        <h2>À espera de um milagre!</h2>
       </ion-card-content>
     </ion-card>
   </div>
   <ion-card class="card" *ngIf="travel.actualScore !== undefined">
     <ion-card-header>
       <ion-card-subtitle>Corrida em progresso</ion-card-subtitle>
-      <ion-card-title> Pontuação: {{ travel.actualScore }} </ion-card-title>
+      <ion-card-title *ngIf="travel.actualScore < 850"> Pontuação: <span class="pontos">{{ travel.actualScore }}</span>
+      </ion-card-title>
+      <ion-card-title *ngIf="travel.actualScore >= 850"> Pontuação: {{ travel.actualScore }} </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <h2> Carro: {{ travel.model }}</h2>
+      <h2> {{ travel.model }}</h2>
     </ion-card-content>
   </ion-card>
   <ion-card class="card" *ngIf="travel.infractions.length > 0">
@@ -58,18 +63,17 @@
     <ion-list>
       <ion-item *ngFor="let item of travel.infractions">
         <ion-label>{{ item.title }}
-          <ion-label color="tertiary" *ngIf="item.scoreLost <= 30">Pontos: - {{ item.scoreLost }}</ion-label>
-          <ion-label color="warning" *ngIf="item.scoreLost > 30 && item.scoreLost < 80">Pontos: - {{ item.scoreLost }}
-          </ion-label>
-          <ion-label color="danger" *ngIf="item.scoreLost > 80">Pontos: - {{ item.scoreLost }}</ion-label>
+          <h3>Pontos: <span class="pontos">- {{ item.scoreLost }}</span></h3>
         </ion-label>
+
       </ion-item>
 
     </ion-list>
   </ion-card>
   <ion-grid>
     <ion-row *ngIf="pontuacaoGlobal">
-      <ion-button (click)="goToTravelHistory()" shape="round" fill="outline" color="dark" class="btn">Histórico Corridas
+      <ion-button (click)="goToTravelHistory()" shape="round" fill="outline" color="dark" class="btn">Histórico de
+        Corridas
       </ion-button>
     </ion-row>
   </ion-grid>
