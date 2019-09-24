@@ -56,19 +56,30 @@
       <h2> {{ travel.model }}</h2>
     </ion-card-content>
   </ion-card>
+
   <ion-card class="card" *ngIf="travel.infractions.length > 0">
-    <ion-card-header>
-      <ion-card-title> Infrações: </ion-card-title>
-    </ion-card-header>
-    <ion-list>
-      <ion-item *ngFor="let item of travel.infractions">
-        <ion-label>{{ item.title }}
-          <h3>Pontos: <span class="pontos">- {{ item.scoreLost }}</span></h3>
-        </ion-label>
 
-      </ion-item>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <ion-card-header>
+              <ion-card-title> Infrações: </ion-card-title>
+            </ion-card-header>
+          </mat-panel-title>
 
-    </ion-list>
+        </mat-expansion-panel-header>
+        <ion-list>
+          <ion-item *ngFor="let item of travel.infractions">
+            <ion-label>{{ item.title }}
+              <h3>Pontos: <span class="pontos">- {{ item.scoreLost }}</span></h3>
+            </ion-label>
+
+          </ion-item>
+
+        </ion-list>
+      </mat-expansion-panel>
+    </mat-accordion>
   </ion-card>
   <ion-grid>
     <ion-row *ngIf="pontuacaoGlobal">
