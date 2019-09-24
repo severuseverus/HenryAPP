@@ -23,6 +23,7 @@ export class Travel {
     startDate: Date;
     endDate: Date;
     startPrice: Number;
+    finalPrice: Number;
     initialKm: Number;
     currentKm: Number;
     infractions: Array<Infractions>;

@@ -11,13 +11,15 @@
   <ion-virtual-scroll [items]="travels">
     <ion-item *virtualItem="let travels;" lines="none">
       <span class="vl"></span>
-      <span class="dot"></span>
-      <span class="dot2"></span>
-      <ion-label>
+      <div class="dot">
+        <div class="dot2"></div>
+      </div>
+
+      <ion-label class="info">
         <h1>{{ travels.store.name }}</h1>
         <h2>{{ travels.startDate | date: 'dd/MM/yyyy' }} - {{ travels.endDate | date: 'dd/MM/yyyy' }}</h2>
         <h3>{{ travels.model }} </h3>
-        <h3><b>R$ {{ travels.startPrice }},00</b></h3>
+        <h3><b>{{ (travels.finalPrice ? travels.finalPrice : travels.startPrice) | currency: "BRL" }}</b></h3>
         <br>
         <h3 *ngIf="travels.status == 2" class="finished">Corrida Finalizada</h3>
         <h3 *ngIf="travels.status == 1" class="progress">Corrida em Andamento</h3>
