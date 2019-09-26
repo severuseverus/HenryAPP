@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { TravelService } from './../../services/travel.service';
 import { UserService } from './../../services/user.service';
 import { Travel } from '../../models/travel.model';
@@ -13,11 +13,10 @@ import { Router } from '@angular/router';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnDestroy {
+export class HomePage {
   user = null;
   travel: Travel = new Travel();
   helper = null;
-  pont = 0;
   pontuacaoGlobal = 0;
   repeat: Observable<number>;
   shouldTake = true;
@@ -44,8 +43,10 @@ export class HomePage implements OnDestroy {
     await this.getTravel();
   }
 
-  ngOnDestroy(): void {
+  ionViewWillLeave() {
     this.shouldTake = false;
+    this.travel = new Travel();
+    this.pontuacaoGlobal = 0;
   }
 
   goToTravelHistory() {

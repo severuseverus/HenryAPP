@@ -22,7 +22,7 @@
       <ion-card-header>
         <!--          <ion-card-subtitle>{{name}}</ion-card-subtitle> -->
         <ion-card-subtitle *ngIf="user">{{ user.name }}</ion-card-subtitle>
-        <ion-card-title *ngIf="pontuacaoGlobal < 850"> Pontuação Global: <span
+        <ion-card-title *ngIf="pontuacaoGlobal < 850 && pontuacaoGlobal > 0"> Pontuação Global: <span
             class="pontos">{{ pontuacaoGlobal }}</span>
         </ion-card-title>
         <ion-card-title *ngIf="pontuacaoGlobal >=850"> Pontuação Global: {{ pontuacaoGlobal }} </ion-card-title>
@@ -40,7 +40,7 @@
       <ion-card-content fullscreen *ngIf="pontuacaoGlobal >= 500 && pontuacaoGlobal < 850">
         <h2>Cangaceiro do tráfego!</h2>
       </ion-card-content>
-      <ion-card-content fullscreen *ngIf="pontuacaoGlobal < 500">
+      <ion-card-content fullscreen *ngIf="pontuacaoGlobal < 500 && pontuacaoGlobal > 0">
         <h2>À espera de um milagre!</h2>
       </ion-card-content>
     </ion-card>
