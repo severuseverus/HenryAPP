@@ -43,12 +43,6 @@ export class HomePage {
     await this.getTravel();
   }
 
-  ionViewWillLeave() {
-    this.shouldTake = false;
-    this.travel = new Travel();
-    this.pontuacaoGlobal = 0;
-  }
-
   goToTravelHistory() {
     this.router.navigate(['travel-history']);
   }
@@ -60,6 +54,9 @@ export class HomePage {
 
   async sair() {
     await this.userService.logout();
+    this.shouldTake = false;
+    this.travel = new Travel();
+    this.pontuacaoGlobal = 0;
     this.router.navigate(['login']);
   }
 
