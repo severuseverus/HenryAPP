@@ -50,17 +50,11 @@
   <ion-card class="card" *ngIf="travel.actualScore !== undefined">
     <ion-card-header>
       <ion-card-subtitle>Corrida em progresso</ion-card-subtitle>
-      <ion-card-title *ngIf="travel.actualScore < 850"> Pontuação: 
-        <span class="vermelho">{{ travel.actualScore }}</span>
-      </ion-card-title>
-      <ion-card-title *ngIf="travel.actualScore >= 850 && travel.actualScore < 900"> Pontuação: 
-        <span class="amarelo">{{ travel.actualScore }}</span>
-      </ion-card-title>
-      <ion-card-title *ngIf="travel.actualScore >= 900 && travel.actualScore < 950"> Pontuação: 
-        <span class="azul">{{ travel.actualScore }}</span>
-      </ion-card-title>
-      <ion-card-title *ngIf="travel.actualScore >= 950"> Pontuação: 
-        <span class="verde">{{ travel.actualScore }}</span>
+      <ion-card-title> Pontuação: 
+        <span [ngClass]="{'vermelho': travel.actualScore < 850 && travel.actualScore > 0,
+            'amarelo': travel.actualScore >= 850 && travel.actualScore < 900,
+            'azul': travel.actualScore >= 900 && travel.actualScore < 950,
+            'verde': travel.actualScore >= 950}">{{ travel.actualScore }}</span>
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>

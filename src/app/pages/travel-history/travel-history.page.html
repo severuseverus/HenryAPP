@@ -25,17 +25,11 @@
         <h3 *ngIf="travels.status == 1" class="progress">Corrida em Andamento</h3>
         <h3 *ngIf="travels.status == 0">Corrida Criada</h3>
         
-        <h2 *ngIf="travels.actualScore < 850">Pontuação: 
-          <span class="vermelho">{{ travels.actualScore }}</span>
-        </h2>
-        <h2 *ngIf="travels.actualScore >= 850  && travels.actualScore < 900">Pontuação:
-          <span class="amarelo">{{ travels.actualScore }}</span>
-        </h2>
-        <h2 *ngIf="travels.actualScore >= 900  && travels.actualScore < 950">Pontuação:
-          <span class="azul">{{ travels.actualScore }}</span>
-        </h2>
-        <h2 *ngIf="travels.actualScore >= 950">Pontuação: 
-          <span class="verde">{{ travels.actualScore }}</span>
+        <h2>Pontuação: 
+          <span [ngClass]="{'vermelho': travels.actualScore < 850 && travels.actualScore > 0,
+              'amarelo': travels.actualScore >= 850 && travels.actualScore < 900,
+              'azul': travels.actualScore >= 900 && travels.actualScore < 950,
+              'verde': travels.actualScore >= 950}">{{ travels.actualScore }}</span>
         </h2>
       </ion-label>
     </ion-item>
