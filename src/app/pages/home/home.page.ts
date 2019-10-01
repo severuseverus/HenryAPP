@@ -7,6 +7,10 @@ import { Storage } from '@ionic/storage';
 import { interval, Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/pt';
+
+registerLocaleData(localeFr, 'pt');
 
 @Component({
   selector: 'app-home',
@@ -33,18 +37,21 @@ export class HomePage {
 
     this.user = await this.storage.get('user');
 
-    let pont = 0;
-    this.helper = (await this.travelService.getMedia(this.user._id))["_data"];
-    for (let key in this.helper) {
-      pont += this.helper[key]['actualScore'];
-    }
-    this.pontuacaoGlobal = pont / this.helper.length;
+    const travels = await this.calculateGlobalScore();
+    this.pontuacaoGlobal = 1000;
+    this.travel = travels.filter((_: Travel) => _.status == 1)[0];
     this.repeat.subscribe(() => this.getTravel());
-    await this.getTravel();
   }
 
   goToTravelHistory() {
     this.router.navigate(['travel-history']);
+  }
+
+  async calculateGlobalScore() {
+    const travels = (await this.travelService.getMedia(this.user._id))["_data"];
+    const pontuacao = travels.reduce((total: number, travel: Travel) => (travel.status == 2) ? total + travel.actualScore : total, 0);
+    this.pontuacaoGlobal = pontuacao / travels.filter((_: Travel) => _.status == 2).length;
+    return travels;
   }
 
   async getTravel() {

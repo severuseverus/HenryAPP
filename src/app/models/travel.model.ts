@@ -1,31 +1,31 @@
 import { Infractions } from './infractions.model';
 
 export class Travel {
-    status: Number;
+    status: number;
     user: {
-        _id: String;
-        name: String;
-        email: String;
-        imageSrc: String;
-        cpf: String;
+        _id: string;
+        name: string;
+        email: string;
+        imageSrc: string;
+        cpf: string;
     }
     store: {
-        name: String;
-        cnpj: String;
-        group: String;
+        name: string;
+        cnpj: string;
+        group: string;
     }
-    initialScore: Number;
-    actualScore: Number;
-    model: String;
-    color: String;
-    licensePlate: String;
-    vin: String;
+    initialScore: number;
+    actualScore: number;
+    model: string;
+    color: string;
+    licensePlate: string;
+    vin: string;
     startDate: Date;
     endDate: Date;
-    startPrice: Number;
-    finalPrice: Number;
-    initialKm: Number;
-    currentKm: Number;
+    startPrice: number;
+    finalPrice: number;
+    initialKm: number;
+    currentKm: number;
     infractions: Array<Infractions>;
 
     constructor() {

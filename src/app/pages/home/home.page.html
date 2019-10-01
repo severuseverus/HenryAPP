@@ -22,11 +22,13 @@
       <ion-card-header>
         <!--          <ion-card-subtitle>{{name}}</ion-card-subtitle> -->
         <ion-card-subtitle *ngIf="user">{{ user.name }}</ion-card-subtitle>
-        <ion-card-title *ngIf="pontuacaoGlobal < 850 && pontuacaoGlobal > 0"> Pontuação Global: <span
-            class="pontos">{{ pontuacaoGlobal }}</span>
+        <ion-card-title *ngIf="pontuacaoGlobal > 0"> Pontuação Global: 
+            <span [ngClass]="{'vermelho': pontuacaoGlobal < 850 && pontuacaoGlobal > 0,
+                              'amarelo': pontuacaoGlobal >= 850 && pontuacaoGlobal < 900,
+                              'azul': pontuacaoGlobal >= 900 && pontuacaoGlobal < 950,
+                              'verde': pontuacaoGlobal >= 950}">{{ pontuacaoGlobal | number: '1.0-0':'pt' }}</span>
         </ion-card-title>
-        <ion-card-title *ngIf="pontuacaoGlobal >=850"> Pontuação Global: {{ pontuacaoGlobal }} </ion-card-title>
-        <ion-card-title *ngIf="!pontuacaoGlobal"> Nenhuma corrida finalizada </ion-card-title>
+        <ion-card-title *ngIf="pontuacaoGlobal == 0"> Nenhuma corrida finalizada </ion-card-title>
       </ion-card-header>
       <ion-card-content fullscreen *ngIf="pontuacaoGlobal >= 950">
         <h2>A lenda das ruas!</h2>
@@ -48,9 +50,18 @@
   <ion-card class="card" *ngIf="travel.actualScore !== undefined">
     <ion-card-header>
       <ion-card-subtitle>Corrida em progresso</ion-card-subtitle>
-      <ion-card-title *ngIf="travel.actualScore < 850"> Pontuação: <span class="pontos">{{ travel.actualScore }}</span>
+      <ion-card-title *ngIf="travel.actualScore < 850"> Pontuação: 
+        <span class="vermelho">{{ travel.actualScore }}</span>
       </ion-card-title>
-      <ion-card-title *ngIf="travel.actualScore >= 850"> Pontuação: {{ travel.actualScore }} </ion-card-title>
+      <ion-card-title *ngIf="travel.actualScore >= 850 && travel.actualScore < 900"> Pontuação: 
+        <span class="amarelo">{{ travel.actualScore }}</span>
+      </ion-card-title>
+      <ion-card-title *ngIf="travel.actualScore >= 900 && travel.actualScore < 950"> Pontuação: 
+        <span class="azul">{{ travel.actualScore }}</span>
+      </ion-card-title>
+      <ion-card-title *ngIf="travel.actualScore >= 950"> Pontuação: 
+        <span class="verde">{{ travel.actualScore }}</span>
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <h2> {{ travel.model }}</h2>
@@ -72,7 +83,7 @@
         <ion-list>
           <ion-item *ngFor="let item of travel.infractions">
             <ion-label>{{ item.title }}
-              <h3>Pontos: <span class="pontos">- {{ item.scoreLost }}</span></h3>
+              <h3>Pontos: <span class="vermelho">- {{ item.scoreLost }}</span></h3>
             </ion-label>
 
           </ion-item>
