@@ -38,7 +38,8 @@ export class HomePage {
     this.user = await this.storage.get('user');
 
     const travels = await this.calculateGlobalScore();
-    this.travel = travels.filter((_: Travel) => _.status == 1)[0];
+    const travelsActive = travels.filter((_: Travel) => _.status == 1);
+    this.travel = (travelsActive.length > 0) ? travelsActive[0] : new Travel();
     this.repeat.subscribe(() => this.getTravel());
   }
 
